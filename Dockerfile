@@ -44,4 +44,4 @@ RUN ansible-playbook playbook.yml
 EXPOSE 80
 
 # Set up what begins when your container starts
-CMD ["/usr/sbin/httpd -D FOREGROUND"]
+CMD /usr/sbin/httpd -D FOREGROUND
