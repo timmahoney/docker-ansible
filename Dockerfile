@@ -4,7 +4,7 @@ MAINTAINER Tim Mahoney <tim@timothymahoney.com>
 
 # Add some basic packages; CentOS doesn't ship with much, but pare this down if you don't want it.
 RUN yum -y update ; yum clean all
-RUN yum -y install vim make epel-release tar wget unzip gcc git ; yum clean all
+RUN yum -y install sudo vim make epel-release tar wget unzip gcc git ; yum clean all
 
 # Install Ansible
 RUN yum -y install ansible
@@ -22,6 +22,9 @@ RUN chmod 0600 /root/.ssh/config
 
 # Add github to your known hosts
 RUN ssh-keyscan -H github.com > /root/.ssh/known_hosts
+
+# Bust the cache so that ansible runs every time.
+ADD http://www.random.org/strings/?num=10&len=8&digits=on&upperalpha=on&loweralpha=on&unique=on&format=plain&rnd=new uuid
 
 # I put repo checkouts in /opt. Feel free to change it to something else.
 RUN mkdir /opt/ansible
